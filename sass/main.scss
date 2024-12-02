@@ -7,12 +7,16 @@ html {
 }
 
 body {
-  margin:$baseline 0;
+  margin: 0;
   font-size:$font-size;
   font-family:$font-family;
   line-height: $line-height;
   background:$background;
   color:$color;
+}
+
+#header-bar {
+  height: 5px;
 }
 
 @keyframes fade-in {
@@ -52,8 +56,9 @@ h4 {
     text-decoration: none;
     cursor: pointer;
     line-height: 1;
-    color:$color;
+    color:$heading-color;
   }
+  color:$heading-color;
 
   &:hover {
     .anchor {
@@ -115,22 +120,54 @@ pre {
     display: block;
   }
 
+#nav-link-widget {
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
 nav {
   position: sticky;
-  height: 92vh;
-  top:$baseline;
-  left:$baseline;
+  height: 100vh;
+  top: 0;
+  padding-left: 1rem;
+  left: 0;
   bottom: $baseline;
   padding-right: $baseline;
-  width: 20rem;
+  width: 16rem;
+  background-color: $nav-bg;
+  color: $nav-color;
 
-  img {
+  div.title-box {
+    flex-direction: column;
+    margin: 2rem 0 0 0;
+  }
+
+  img.link-icon {
+    width:1.5rem;
+  }
+
+  img.header-img {
+    margin: 2rem 0 0 0;
     width:128px;
   }
 
   h1 {
     margin:0;
     line-height: 1;
+  }
+
+  a:visited {
+    color:$nav-visited-links;
+  }
+
+  &.a:visited {
+    color:$nav-visited-links;
+  }
+
+  &:a {
+    color:$nav-links;
   }
 }
 
@@ -165,13 +202,14 @@ main {
 
 #release {
   text-align: left;
-  margin:$baseline 0;
+  margin: 0.5rem 0;
 
 &::before {
   display: inline-block;
   content: "\EE2E";
   font-family: 'FabricMDL2Icons';
   margin-right:calc(#{$baseline} / 8);
+  padding-right:0.25rem
 }
 }
 
@@ -268,7 +306,7 @@ main {
 
 
   a {
-    color:$color;
+    color:$nav-links;
   }
 
   &::before {
@@ -309,7 +347,13 @@ article {
   nav {
     position: inherit;
     height:auto;
-    margin:$baseline $baseline 0 $baseline;
+    margin: 0 0 0 0;
+    width: 100%;
+
+    img.header-img {
+      margin: 2rem 0 0 0;
+      width:64px;
+    }
   }
 
   article {
@@ -324,7 +368,7 @@ article {
     font-size: $baseline;
     margin:0 $baseline 0 0;
     display: block;
-    color:$color;
+    color: $nav-color;
   }
 
   #trees {

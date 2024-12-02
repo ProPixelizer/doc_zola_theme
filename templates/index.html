@@ -44,20 +44,24 @@
                     {% set _logo = get_url(path=config.extra.logo) -%}
                 {% endif -%}
                 {% if current_path == "/" and not config.extra.easydocs_logo_always_clickable -%}
-                    <img src="{{ _logo | safe }}" alt="logo"/>
+                    <img src="{{ _logo | safe }}" alt="logo" class="header-img"/>
                 {% else -%}
                     <a href="{{ config.base_url }}{{ _ugly_url }}">
-                        <img src="{{ _logo | safe }}" alt="logo"/>
+                        <img src="{{ _logo | safe }}" alt="logo" class="header-img"/>
                     </a>
                 {% endif -%}
 
             {% else -%}
-                <h1><a href="{{ config.base_url }}{{ _ugly_url }}">{{ config.title }}</a></h1>
+                <!-- <h1><a href="{{ config.base_url }}{{ _ugly_url }}">{{ config.title }}</a></h1> -->
+            {% endif -%}
+            <h1><a href="{{ config.base_url }}{{ _ugly_url }}">{{ config.title }}</a></h1>
+            {% if config.extra.package_version -%}
+            <div id="release">{{ config.extra.package_version }}</div>
             {% endif -%}
 
-            {% if config.extra.release -%}
-                <div id="release"></div>
-            {% endif -%}
+            <div id="nav-link-widget">
+                <a href="https://discord.gg/Xdjp8Qs43Y"><img  class="link-icon" src="{{ get_url(path="discord.png") }}" alt="discord"/></a>
+            </div>
 
             <a href="javascript:void(0);" onclick="burger()" id="mobile" class="ms-Icon--GlobalNavButton"></a>
             <div id="trees">
@@ -130,8 +134,11 @@
         </nav>
     {% endblock nav -%}
 
+    
     <article>
-
+        
+        <div id="title-bar">
+            <h1 class="page-title">{% block article_title %}{{ config.title }}{% endblock article_title %}</h1>
         {% if config.build_search_index -%}
             <div id="on_right">
                 <span id="search-ico" class="ms-Icon--Search"></span>
@@ -144,6 +151,7 @@
                 </div>
             </div>
         {% endif -%}
+        </div>
 
         <div id="wrap">
             {% block content -%}

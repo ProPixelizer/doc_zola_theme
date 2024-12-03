@@ -20,4 +20,11 @@ $quote-border: #808080 8px solid;
 $nav-bg:rgb(33,33,33);
 $nav-color:#FFFFFF;
 $nav-links:#D1D1D1;
-$nav-visited-links:#B1B1B1;
+$nav-visited-links: $nav-links;
+$nav-width: 16rem;
+$nav-page-icon-color: $heading-color;
+
+$article-titlebar-bg:#157c00;
+$article-titlebar-color:#FFFFFF;
+
+$search-bg: #e6e6e6;

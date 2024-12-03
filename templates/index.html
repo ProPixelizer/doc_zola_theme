@@ -38,29 +38,35 @@
 
     {%- block nav -%}
         <nav>
-            {% if config.extra.logo -%}
-                {% set _logo = config.extra.logo -%}
-                {% if (_logo is starting_with("http")) == false -%}
-                    {% set _logo = get_url(path=config.extra.logo) -%}
-                {% endif -%}
-                {% if current_path == "/" and not config.extra.easydocs_logo_always_clickable -%}
-                    <img src="{{ _logo | safe }}" alt="logo" class="header-img"/>
-                {% else -%}
-                    <a href="{{ config.base_url }}{{ _ugly_url }}">
+            <div class="title-box">
+                {% if config.extra.logo -%}
+                    {% set _logo = config.extra.logo -%}
+                    {% if (_logo is starting_with("http")) == false -%}
+                        {% set _logo = get_url(path=config.extra.logo) -%}
+                    {% endif -%}
+                    {% if current_path == "/" and not config.extra.easydocs_logo_always_clickable -%}
                         <img src="{{ _logo | safe }}" alt="logo" class="header-img"/>
-                    </a>
+                    {% else -%}
+                        <a href="{{ config.base_url }}{{ _ugly_url }}">
+                            <img src="{{ _logo | safe }}" alt="logo" class="header-img"/>
+                        </a>
+                    {% endif -%}
+
+                {% else -%}
+                    <!-- <h1><a href="{{ config.base_url }}{{ _ugly_url }}">{{ config.title }}</a></h1> -->
                 {% endif -%}
+                <h1><a href="{{ config.base_url }}{{ _ugly_url }}">{{ config.title }}</a></h1>
+            </div>
 
-            {% else -%}
-                <!-- <h1><a href="{{ config.base_url }}{{ _ugly_url }}">{{ config.title }}</a></h1> -->
-            {% endif -%}
-            <h1><a href="{{ config.base_url }}{{ _ugly_url }}">{{ config.title }}</a></h1>
-            {% if config.extra.package_version -%}
-            <div id="release">{{ config.extra.package_version }}</div>
-            {% endif -%}
 
-            <div id="nav-link-widget">
-                <a href="https://discord.gg/Xdjp8Qs43Y"><img  class="link-icon" src="{{ get_url(path="discord.png") }}" alt="discord"/></a>
+            <div id="nav-release-links">
+                {% if config.extra.package_version -%}
+                <div id="release">{{ config.extra.package_version }}</div>
+                {% endif -%}
+                <div class="growable"></div>
+                <div id="nav-link-widget">
+                    <a href="https://discord.gg/Xdjp8Qs43Y"><img class="link-icon" src="{{ get_url(path="discord.png") }}" alt="discord"/></a>
+                </div>
             </div>
 
             <a href="javascript:void(0);" onclick="burger()" id="mobile" class="ms-Icon--GlobalNavButton"></a>
@@ -68,12 +74,15 @@
                 {% set section_ = get_section(path="_index.md") -%}
                 {% for p in section_.subsections -%}
                     {% set subsection = get_section(path=p) -%}
-
-
-                    <input class="tree-toggle" type="checkbox" id="{{ subsection.title | slugify }}"
-                           {% if current_path is starting_with(subsection.path) %}checked{% endif %}/>
-                    <label class="tree-toggle-label"
-                           for="{{ subsection.title | slugify }}">{{ subsection.title }}</label>
+                    
+                    {% if subsection.pages | length > 1 %}
+                        <input class="tree-toggle" type="checkbox" id="{{ subsection.title | slugify }}"
+                            {% if current_path is starting_with(subsection.path) %}checked{% endif %}/>
+                        <label class="tree-toggle-label"
+                            for="{{ subsection.title | slugify }}">{{ subsection.title }}</label>
+                    {% else %}
+                        <a href="{{ subsection.path }}" {% if current_path == subsection.path %}class="active"{% endif %}>{{ subsection.title }}</a> 
+                    {% endif %}
 
                     <ul class="subtree">
                         {% for page in subsection.pages -%}
@@ -136,10 +145,12 @@
 
     
     <article>
-        
-        <div id="title-bar">
+        <div id="article-title-bar">
             <h1 class="page-title">{% block article_title %}{{ config.title }}{% endblock article_title %}</h1>
+        </div>
+        
         {% if config.build_search_index -%}
+        <div id="search-pane">
             <div id="on_right">
                 <span id="search-ico" class="ms-Icon--Search"></span>
             </div>
@@ -150,10 +161,11 @@
                     <ul class="search-results__items"></ul>
                 </div>
             </div>
-        {% endif -%}
         </div>
+        {% endif -%}
 
-        <div id="wrap">
+
+        <div id="article-content">
             {% block content -%}
                 {%- if section.word_count -%}
                     {{ section.content |safe }}

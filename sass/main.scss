@@ -15,8 +15,23 @@ body {
   color:$color;
 }
 
-#header-bar {
-  height: 5px;
+#article-title-bar {
+  background: $article-titlebar-bg;
+  margin: 0rem 0rem 0rem 0rem;
+  width: auto;
+  padding: 1rem;
+  font-size: 2rem;
+  color: $article-titlebar-color;
+}
+
+#article-content {
+  margin-left: calc(1.5rem * 2);
+  margin-right: 1rem;
+  width: auto;
+}
+
+#search-pane {
+  margin: 1rem 1rem
 }
 
 @keyframes fade-in {
@@ -120,11 +135,23 @@ pre {
     display: block;
   }
 
+#nav-release-links {
+  width: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+
+  div.growable {
+    flex-grow: 1;
+  }
+}
+
 #nav-link-widget {
     padding-left: 0.5rem;
     padding-top: 0.5rem;
     padding-right: 0.5rem;
     padding-bottom: 0.5rem;
+    text-align: right;
 }
 
 nav {
@@ -135,13 +162,14 @@ nav {
   left: 0;
   bottom: $baseline;
   padding-right: $baseline;
-  width: 16rem;
+  width: $nav-width;
   background-color: $nav-bg;
   color: $nav-color;
 
   div.title-box {
+    display: flex;
     flex-direction: column;
-    margin: 2rem 0 0 0;
+    margin: 2rem 0 0 0;    
   }
 
   img.link-icon {
@@ -149,7 +177,7 @@ nav {
   }
 
   img.header-img {
-    margin: 2rem 0 0 0;
+    margin: 0 0 1rem 0;
     width:128px;
   }
 
@@ -168,6 +196,10 @@ nav {
 
   &:a {
     color:$nav-links;
+  }
+
+  a.active {
+    font-weight: bold;
   }
 }
 
@@ -313,6 +345,7 @@ main {
     content: "\E7C3";
     font-family:'FabricMDL2Icons';
     font-size:0.75rem;
+    color: $nav-page-icon-color;
   }
 
 }
@@ -321,10 +354,9 @@ main {
   font-weight: bold;
 }
 
-
 article {
- width: calc(100% - (#{$baseline} * 4 + 20rem));
- margin-left:calc(#{$baseline} * 2);
+ width: calc(100% - $nav-width);
+ margin-left: 0;
 
  img {
    max-width:100%;
@@ -348,17 +380,30 @@ article {
     position: inherit;
     height:auto;
     margin: 0 0 0 0;
-    width: 100%;
+    width: auto;
+
+    div.title-box {
+      display: flex;
+      flex-direction: row;
+      margin: 2rem 0 0 0;
+      vertical-align: middle;
+      align-items: center; /* Align vertical */
+
+      h1 {
+        height : auto;
+        text-align: center;
+      }
+    }
 
     img.header-img {
-      margin: 2rem 0 0 0;
+      margin: 0 1rem 0 0;
       width:64px;
     }
   }
 
   article {
-    width: calc(100% - (#{$baseline} * 2));
-    margin:0 $baseline;
+    width: auto;
+    margin:0 0;
     z-index:1;
   }
 
@@ -383,6 +428,11 @@ article {
 
   #on_right {
     margin-top:$baseline;
+  }
+
+  #article-title-bar {
+    padding: 0.1rem 1rem;
+    font-size: 1.2rem;
   }
 }
 

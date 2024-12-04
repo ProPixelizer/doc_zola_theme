@@ -28,6 +28,20 @@ body {
   margin-left: calc(1.5rem * 2);
   margin-right: 1rem;
   width: auto;
+
+  div.article-image {
+    padding: 1rem;
+    margin: 5px auto 5px auto;
+    background: #f7f7f7;
+    width: 600px;
+
+    img {
+      padding: 0rem;
+      margin: auto;
+      height: auto;
+      width: 100%;
+    }
+  }
 }
 
 #search-pane {
@@ -433,6 +447,16 @@ article {
   #article-title-bar {
     padding: 0.1rem 1rem;
     font-size: 1.2rem;
+  }
+
+  #article-content { 
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    div.article-image {
+      padding: 0rem;
+      margin: auto;
+      width: auto;
+    }
   }
 }
 

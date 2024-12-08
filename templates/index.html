@@ -81,7 +81,7 @@
                         <label class="tree-toggle-label"
                             for="{{ subsection.title | slugify }}">{{ subsection.title }}</label>
                     {% else %}
-                        <a href="{{ subsection.path }}" {% if current_path == subsection.path %}class="active"{% endif %}>{{ subsection.title }}</a> 
+                        <a href="{{ subsection.permalink }}" {% if current_path == subsection.path %}class="active"{% endif %}>{{ subsection.title }}</a> 
                     {% endif %}
 
                     <ul class="subtree">

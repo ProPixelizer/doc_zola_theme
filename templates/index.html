@@ -44,7 +44,7 @@
                     {% if (_logo is starting_with("http")) == false -%}
                         {% set _logo = get_url(path=config.extra.logo) -%}
                     {% endif -%}
-                    {% if current_path == "/" and not config.extra.easydocs_logo_always_clickable -%}
+                    {% if current_path and current_path == "/" and not config.extra.easydocs_logo_always_clickable -%}
                         <img src="{{ _logo | safe }}" alt="logo" class="header-img"/>
                     {% else -%}
                         <a href="{{ config.base_url }}{{ _ugly_url }}">
@@ -77,22 +77,22 @@
                     
                     {% if subsection.pages | length > 1 %}
                         <input class="tree-toggle" type="checkbox" id="{{ subsection.title | slugify }}"
-                            {% if current_path is starting_with(subsection.path) %}checked{% endif %}/>
+                            {% if current_path and current_path is starting_with(subsection.path) %}checked{% endif %}/>
                         <label class="tree-toggle-label"
                             for="{{ subsection.title | slugify }}">{{ subsection.title }}</label>
                     {% else %}
-                        <a href="{{ subsection.permalink }}" {% if current_path == subsection.path %}class="active"{% endif %}>{{ subsection.title }}</a> 
+                        <a href="{{ subsection.permalink }}" {% if current_path and current_path == subsection.path %}class="active"{% endif %}>{{ subsection.title }}</a> 
                     {% endif %}
 
                     <ul class="subtree">
                         {% for page in subsection.pages -%}
-                            <li {% if current_path == page.path %}class="active"{% endif %}>
+                            <li {% if current_path and current_path == page.path %}class="active"{% endif %}>
                                 <a href="{{ page.permalink | safe }}{{ _ugly_url }}">{{ page.title }}</a>
                             </li>
 
                             {% if page.toc -%}
 
-                                {% if current_path == page.path -%}
+                                {% if current_path and current_path == page.path -%}
 
                                     {# Count number of headers on page #}
                                     {% set_global header_count = 0 -%}

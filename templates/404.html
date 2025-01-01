@@ -1,0 +1,6 @@
+{% extends "index.html" %}
+{% block title %} {{config.title}} | Page not found! {% endblock title %}
+    {% block content %}
+        Apologies, but I can't find the page you asked for! Can I recommend the <a href="{{get_url(path="welcome")}}">welcome page</a>?
+    {% endblock content %}
+{% block article_title %}Page not found{% endblock article_title %}

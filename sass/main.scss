@@ -110,7 +110,7 @@ pre {
   position: relative;
 
   code {
-  background:transparent;
+    
 
   &::after {
     content: attr(data-lang);
@@ -127,6 +127,9 @@ pre {
 
  code {
     font: $code_font;
+    background:$code-bg;
+    border-radius: 4px;
+    padding: 2px;
   }
 
   .copy-code-button {
@@ -466,6 +469,7 @@ blockquote {
   background-color: $quote-bg;
   padding: 0 20px;
 }
+
 
 @import "fabric-icons-inline";
 @import "search";
